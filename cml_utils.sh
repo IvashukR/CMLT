@@ -34,7 +34,7 @@ function disable_logging() {
 }
 function show_logs() 
 {
-    cat $FILE_LOGS
+    sudo cat $FILE_LOGS
 }
 function clean_logs() 
 {
