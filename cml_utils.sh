@@ -30,7 +30,7 @@ function start_log()
         echo "Log file already exists: $FILE_LOGS"
     fi
     if ! grep -q "PROMPT_COMMAND" "$HOME/.bashrc"; then
-        echo 'export PROMPT_COMMAND="echo \"\$(whoami): \$(date): \\\$BASH_COMMAND\" >> '"$FILE_LOGS"'"' >> "$HOME/.bashrc"
+        echo 'export PROMPT_COMMAND="echo \"\$(whoami): \$(date): \$(history 1 | sed \"s/^ *[0-9]* *//\")\" >> '"$FILE_LOGS"'"' >> "$HOME/.bashrc"
         source "$HOME/.bashrc"
     fi
 }
