@@ -1,4 +1,5 @@
 #!/bin/bash
+
 FILELOGS = "/usr/local/bin/cml/logs.txt"
 function show_help()
 {
@@ -16,7 +17,7 @@ function remove_util()
 }
 function start_log() 
 {
-    if [! -f "$FILELOGS"]; then
+    if [ ! -f "$FILELOGS"]; then
         sudo touch FILE_LOGS
     else
         echo "you have file logs"
