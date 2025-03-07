@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILELOGS = "/usr/local/bin/cml/logs.txt"
+FILELOGS="$HOME/logs.txt"
 function show_help()
 {
     echo "cml functions:"
@@ -13,21 +13,25 @@ function show_help()
 function remove_util()
 {
     sudo rm -rf /usr/local/bin/cml
+    remove_util
     hash -r
 }
 function start_log() 
 {
-    if [ ! -f "$FILELOGS"]; then
+    if [ ! -f "$FILELOGS" ]; then
         sudo touch FILE_LOGS
+        echo "Log file created: $FILELOGS"
     else
-        echo "you have file logs"
+        echo "Log file already exists: $FILELOGS"
     fi
     if ! grep -q "PROMPT_COMMAND" "$HOME/.bashrc"; then
         echo "export PROMPT_COMMAND='echo \"\$(whoami): \$(date): \\\$BASH_COMMAND\" >> $FILELOGS'" >> "$HOME/.bashrc"
+        source "$HOME/.bashrc"
     fi
 }
 function disable_logging() {
     sed -i "/PROMPT_COMMAND/d" "$HOME/.bashrc"
+    source "$HOME/.bashrc"
 }
 function show_logs() 
 {
