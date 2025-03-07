@@ -1,6 +1,7 @@
 #!/bin/bash
 
-FILE_LOGS="/usr/local/bin/cml_logs.txt"
+DIR_CLM="$HOME/clm"
+FILE_LOGS="$DIR_CLM/cml_logs.txt"
 function show_help()
 {
     echo "cml functions:"
@@ -12,14 +13,17 @@ function show_help()
 }
 function remove_util()
 {
+    sudo rm -rf "$DIR_CLM"
     sudo rm -rf /usr/local/bin/cml
     hash -r
 }
 function start_log() 
 {
+    mkdir -p "$DIR_CLM"
     if [ ! -f "$FILE_LOGS" ]; then
-        sudo touch $FILE_LOGS
-        sudo chmod +x $FILE_LOGS
+        sudo chmod +x "$DIR_CLM"
+        sudo touch "$FILE_LOGS"
+        sudo chmod +x "$FILE_LOGS"
         echo "Log file created: $FILE_LOGS"
     else
         echo "Log file already exists: $FILE_LOGS"
@@ -35,15 +39,15 @@ function disable_logging() {
 }
 function show_logs() 
 {
-    sudo cat $FILE_LOGS
+    sudo cat "$FILE_LOGS"
 }
 function clean_logs() 
 {
-    > $FILE_LOGS
+    > "$FILE_LOGS"
 }
 function remove_logs() 
 {
-    rm $FILE_LOGS
+    rm "$FILE_LOGS"
 }
     
 if [ "$#" -eq 0 ]; then
