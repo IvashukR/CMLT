@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE_LOGS="/usr/local/bin/cml/logs.txt"
+FILE_LOGS="/usr/local/bin/cml_logs.txt"
 function show_help()
 {
     echo "cml functions:"
@@ -13,7 +13,6 @@ function show_help()
 function remove_util()
 {
     sudo rm -rf /usr/local/bin/cml
-    remove_logs
     hash -r
 }
 function start_log() 
