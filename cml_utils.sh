@@ -71,4 +71,3 @@ case $1 in
         ;;
 
 esac
-source "$HOME/.bashrc"
