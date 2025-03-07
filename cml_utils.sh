@@ -1,7 +1,6 @@
 #!/bin/bash
 
 DIR_CLM="$HOME/clm"
-ACTIVE_LOG=false
 FILE_LOGS="$DIR_CLM/cml_logs.txt"
 function show_help()
 {
@@ -32,13 +31,12 @@ function start_log()
     else
         echo "Log file already exists: $FILE_LOGS"
     fi
-    if $ACTIVE_LOG; then
-        local command=$(history 1 | sed 's/^[ ]*[0-9]\+[ ]*//')
-        echo "$(whoami): $(date): $command" >> "$FILE_LOGS"
-    fi
+    echo 'PROMPT_COMMAND="history 1 >> '$FILE_LOGS'"' >> "$HOME/.bashrc"
+    source "$HOME/.bashrc"
 }
 function disable_logging() {
-    $ACTIVE_LOG=false;
+    sed -i '/PROMPT_COMMAND="/d' "$HOME/.bashrc"
+    source "$HOME/.bashrc"
 }
 function show_logs() 
 {
