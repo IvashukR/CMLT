@@ -23,6 +23,7 @@ function start_log()
     if [ ! -f "$FILE_LOGS" ]; then
         sudo chmod 777 "$DIR_CLM"
         sudo touch "$FILE_LOGS"
+        sudo chmod 777 "$FILE_LOGS"
         sudo chmod +x "$FILE_LOGS"
         echo "Log file created: $FILE_LOGS"
     else
