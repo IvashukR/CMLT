@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DIR_CLM="$HOME/clm"
+ACTIVE_LOG=false
 FILE_LOGS="$DIR_CLM/cml_logs.txt"
 function show_help()
 {
@@ -13,7 +14,9 @@ function show_help()
 }
 function remove_util()
 {
-    sudo rm -rf "$DIR_CLM"
+    if [ ! -f "$DIR_CLM" ]; then
+        sudo rm -rf "$DIR_CLM"
+    fi
     sudo rm -rf /usr/local/bin/cml
     hash -r
 }
@@ -29,14 +32,13 @@ function start_log()
     else
         echo "Log file already exists: $FILE_LOGS"
     fi
-    if ! grep -q "PROMPT_COMMAND" "$HOME/.bashrc"; then
-        echo 'export PROMPT_COMMAND="echo \"\$(whoami): \$(date): \$(history 1 | sed \"s/^ *[0-9]* *//\")\" >> '"$FILE_LOGS"'"' >> "$HOME/.bashrc"
-        source "$HOME/.bashrc"
+    if $ACTIVE_LOG; then
+        local command=$(history 1 | sed 's/^[ ]*[0-9]\+[ ]*//')
+        echo "$(whoami): $(date): $command" >> "$FILE_LOGS"
     fi
 }
 function disable_logging() {
-    sed -i "/PROMPT_COMMAND/d" "$HOME/.bashrc"
-    source "$HOME/.bashrc"
+    $ACTIVE_LOG=false;
 }
 function show_logs() 
 {
