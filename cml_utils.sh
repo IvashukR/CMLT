@@ -19,7 +19,7 @@ function start_log()
 {
     if [ ! -f "$FILE_LOGS" ]; then
         sudo touch $FILE_LOGS
-        chmod +x $FILE_LOGS
+        sudo chmod +x $FILE_LOGS
         echo "Log file created: $FILE_LOGS"
     else
         echo "Log file already exists: $FILE_LOGS"
