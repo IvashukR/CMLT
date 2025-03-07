@@ -31,11 +31,11 @@ function start_log()
     else
         echo "Log file already exists: $FILE_LOGS"
     fi
-    echo 'export PROMPT_COMMAND=\'echo "$(whoami): $(date): $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//")" >> '"$FILE_LOGS"'\'' ' >> "$HOME/.bashrc"
+    echo 'trap '\''echo "$(whoami): $(date): $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//")" >> '"$FILE_LOGS"'\'' DEBUG' >> "$HOME/.bashrc"
     source "$HOME/.bashrc"
 }
 function disable_logging() {
-    sed -i '/PROMPT_COMMAND="/d' "$HOME/.bashrc"
+    sed -i '/trap '\''echo/d' "$HOME/.bashrc"
     source "$HOME/.bashrc"
 }
 function show_logs() 
