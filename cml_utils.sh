@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILELOGS="$HOME/logs.txt"
+FILELOGS="/usr/local/bin/cml/logs.txt"
 function show_help()
 {
     echo "cml functions:"
@@ -19,7 +19,7 @@ function remove_util()
 function start_log() 
 {
     if [ ! -f "$FILELOGS" ]; then
-        sudo touch FILE_LOGS
+        sudo touch $FILE_LOGS
         echo "Log file created: $FILELOGS"
     else
         echo "Log file already exists: $FILELOGS"
