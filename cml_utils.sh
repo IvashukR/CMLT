@@ -1,5 +1,5 @@
 #!/bin/bash
-FILE_LOGS = "/usr/local/bin/cml/logs.txt"
+FILELOGS = "/usr/local/bin/cml/logs.txt"
 function show_help()
 {
     echo "cml functions:"
@@ -16,13 +16,13 @@ function remove_util()
 }
 function start_log() 
 {
-    if [-f "$FILE_LOGS"]; then
+    if [! -f "$FILELOGS"]; then
         sudo touch FILE_LOGS
     else
         echo "you have file logs"
     fi
     if ! grep -q "PROMPT_COMMAND" "$HOME/.bashrc"; then
-        echo "export PROMPT_COMMAND='echo \"\$(whoami): \$(date): \\\$BASH_COMMAND\" >> $FILE_LOGS'" >> "$HOME/.bashrc"
+        echo "export PROMPT_COMMAND='echo \"\$(whoami): \$(date): \\\$BASH_COMMAND\" >> $FILELOGS'" >> "$HOME/.bashrc"
     fi
 }
 function disable_logging() {
@@ -30,15 +30,15 @@ function disable_logging() {
 }
 function show_logs() 
 {
-    cat $FILE_LOGS
+    cat $FILELOGS
 }
 function clean_logs() 
 {
-    > $FILE_LOGS
+    > $FILELOGS
 }
 function remove_logs() 
 {
-    rm $FILE_LOGS
+    rm $FILELOGS
 }
     
 if [ "$#" -eq 0 ]; then
