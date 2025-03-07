@@ -13,7 +13,7 @@ function show_help()
 function remove_util()
 {
     sudo rm -rf /usr/local/bin/cml
-    remove_util
+    remove_logs
     hash -r
 }
 function start_log() 
@@ -25,7 +25,7 @@ function start_log()
         echo "Log file already exists: $FILELOGS"
     fi
     if ! grep -q "PROMPT_COMMAND" "$HOME/.bashrc"; then
-        echo "export PROMPT_COMMAND='echo \"\$(whoami): \$(date): \\\$BASH_COMMAND\" >> $FILELOGS'" >> "$HOME/.bashrc"
+        echo 'export PROMPT_COMMAND="echo \"\$(whoami): \$(date): \\\$BASH_COMMAND\" >> '"$FILELOGS"'"' >> "$HOME/.bashrc"
         source "$HOME/.bashrc"
     fi
 }
