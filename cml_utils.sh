@@ -21,7 +21,7 @@ function start_log()
 {
     mkdir -p "$DIR_CLM"
     if [ ! -f "$FILE_LOGS" ]; then
-        sudo chmod +x "$DIR_CLM"
+        sudo chmod 777 "$DIR_CLM"
         sudo touch "$FILE_LOGS"
         sudo chmod +x "$FILE_LOGS"
         echo "Log file created: $FILE_LOGS"
