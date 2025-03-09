@@ -31,8 +31,7 @@ function start_log()
     else
         echo "Log file already exists: $FILE_LOGS"
     fi
-    echo 'trap '\''echo "$(whoami): $(date): $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//")" >> '"$FILE_LOGS"'\'' DEBUG' >> "$HOME/.bashrc"
-    source "$HOME/.bashrc"
+    script -q -a /dev/stdout | awk '/^.*\$ / {print substr($0, index($0, "$") + 2)}' >> $FILE_LOGS
 }
 function disable_logging() {
     sed -i '/trap '\''echo/d' "$HOME/.bashrc"
